@@ -1,0 +1,71 @@
+volumes:
+  keycloak-data:
+    driver: local
+  e-learning-monolith-back_postgres-keycloak-data:
+    external: true
+  
+# Réseau partagé entre Gateway et Keycloak
+networks:
+  skillshub-net:
+    external: true
+
+services:
+  # Keycloak Database (PostgreSQL)
+  postgres-keycloak:
+    image: postgres:15
+    container_name: postgres-keycloak
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+    ports:
+      - "5435:5432"
+    volumes:
+      - e-learning-monolith-back_postgres-keycloak-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U keycloak -d keycloak" ]
+      interval: 3s
+      retries: 10
+    networks:
+      - skillshub-net
+
+  # Keycloak Service
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0.2
+    container_name: keycloak
+    restart: unless-stopped
+    env_file:
+      - ./envs/dev/gateway-docker.env
+    command:
+      - start-dev
+      - --import-realm
+      - --verbose
+    environment:
+      KC_DB: postgres
+      #KC_DB_URL_HOST: postgres-keycloak
+      #KC_DB_URL_DATABASE: keycloak
+      KC_DB_URL: jdbc:postgresql://postgres-keycloak:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT: false
+      KC_HOSTNAME_STRICT_HTTPS: false
+
+      # 🌍 Pour évolution : profils et cache thèmes (sera géré via .env)
+      KC_THEME_CACHE_TEMPLATES: ${KC_THEME_CACHE_TEMPLATES:-false}
+      KC_THEME_CACHE_STATIC: ${KC_THEME_CACHE_STATIC:-false}
+      KEYCLOAK_LOGLEVEL: DEBUG
+      ROOT_LOGLEVEL: DEBUG
+    ports:
+      - "8085:8080"
+    depends_on:
+      postgres-keycloak:
+        condition: service_healthy
+    networks:
+      - skillshub-net
+    volumes:
+      - ./themes:/opt/keycloak/themes
+

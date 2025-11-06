@@ -1,0 +1,110 @@
+/* =========================================
+   💙 Skillshub - Info Page Custom Theme
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    background: #F8F9FB;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ===============================
+   📦 Wrapper
+   =============================== */
+.info-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.info-box {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* ===============================
+   🧠 Logo
+   =============================== */
+.logo-container img {
+    width: 120px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+/* ===============================
+   🧾 Title
+   =============================== */
+.form-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 1rem;
+}
+
+/* ===============================
+   💬 Info message
+   =============================== */
+.info-message {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 1.8rem;
+    line-height: 1.5;
+}
+
+/* ===============================
+   🔘 Button
+   =============================== */
+.btn-return {
+    display: inline-block;
+    width: 100%;
+    background: #2A6AEE;
+    color: white;
+    font-size: 1rem;
+    padding: 0.8rem;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    font-weight: 500;
+}
+
+.btn-return:hover {
+    background: #1E57C9;
+    transform: translateY(-1px);
+}
+
+/* ===============================
+   📱 Responsive
+   =============================== */
+@media (max-width: 480px) {
+    .info-box {
+        padding: 1.8rem;
+    }
+
+    .logo-container img {
+        width: 100px;
+    }
+
+    .form-title {
+        font-size: 1.2rem;
+    }
+
+    .info-message {
+        font-size: 0.95rem;
+    }
+}

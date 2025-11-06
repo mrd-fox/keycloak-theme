@@ -1,0 +1,257 @@
+/*
+
+/* =========================================
+   🎨 Skillshub Custom Theme - style.css
+   ========================================= */
+
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #f3f4f6, #ffffff);
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+
+/* 🔐 Auth container */
+
+.login-container,
+.register-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.login-box,
+.register-box {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 20px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+}
+
+/* =========================
+   🌍 Language switcher
+   ========================= */
+.language-switcher {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+}
+
+.language-switcher select {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.language-switcher select:hover {
+  border-color: #2A6AEE;
+  color: #2A6AEE;
+}
+
+/* =========================
+   🖼️ Logo
+   ========================= */
+.logo {
+  width: 120px;
+  margin-bottom: 1.5rem;
+}
+
+.logo path {
+  fill: #2A6AEE;
+}
+
+/* =========================
+   🧾 Headings
+   ========================= */
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+/* =========================
+   🧩 Form fields
+   ========================= */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form input:focus {
+  border-color: #2A6AEE;
+  box-shadow: 0 0 0 2px rgba(42, 106, 238, 0.1);
+  outline: none;
+}
+
+/* =========================
+   🧠 Remember me checkbox
+   ========================= */
+.remember-me {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.remember-me label {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* =========================
+   🪄 Buttons
+   ========================= */
+button {
+  width: 100%;
+  background: #2A6AEE;
+  color: white;
+  font-size: 1rem;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+  font-weight: 500;
+}
+
+button:hover {
+  background: #1E57C9;
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* =========================
+   🔗 Links
+   ========================= */
+.links {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.links a {
+  color: #2A6AEE;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.links a:hover {
+  text-decoration: underline;
+  color: #1E57C9;
+}
+
+/* =========================
+   ⚠️ Alert messages
+   ========================= */
+.alert {
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.alert.error {
+  background-color: #ffe4e4;
+  color: #c53030;
+}
+
+.alert.success {
+  background-color: #e6ffed;
+  color: #2f855a;
+}
+
+/* =========================
+   👁️ Password toggle
+   ========================= */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px;
+  /* leave space for the icon */
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.toggle-password:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.toggle-password img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) saturate(100%) invert(33%) sepia(93%) saturate(2033%) hue-rotate(203deg) brightness(97%) contrast(93%);
+}
+
+#kc-header-wrapper {
+  background: none !important;
+}
+
+#kc-logo {
+  content: url('../img/logo-skillshub.png') !important;
+  width: 160px !important;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  display: block;
+}
+
+/* =========================
+   📱 Responsive adjustments
+   ========================= */
+@media (max-width: 480px) {
+
+  .login-box,
+  .register-box {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  .language-switcher {
+    top: 15px;
+    right: 15px;
+  }
+}
