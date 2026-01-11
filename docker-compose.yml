@@ -20,7 +20,7 @@ services:
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: keycloak
     ports:
-      - "5435:5432"
+      - "5436:5432"
     volumes:
       - e-learning-monolith-back_postgres-keycloak-data:/var/lib/postgresql/data
     healthcheck:
