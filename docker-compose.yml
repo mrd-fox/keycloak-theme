@@ -1,7 +1,7 @@
 volumes:
   keycloak-data:
     driver: local
-  e-learning-monolith-back_postgres-keycloak-data:
+  skillshub-keycloak-postgres-data:
     external: true
   
 # Réseau partagé entre Gateway et Keycloak
@@ -22,7 +22,7 @@ services:
     ports:
       - "5436:5432"
     volumes:
-      - e-learning-monolith-back_postgres-keycloak-data:/var/lib/postgresql/data
+      - skillshub-keycloak-postgres-data:/var/lib/postgresql/data
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U keycloak -d keycloak" ]
       interval: 3s
@@ -51,6 +51,8 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_HTTP_ENABLED: true
+      KC_HOSTNAME: auth.skillshub.local
+      KC_HOSTNAME_PORT: 8085
       KC_HOSTNAME_STRICT: false
       KC_HOSTNAME_STRICT_HTTPS: false
 
