@@ -5,6 +5,7 @@ volumes:
 networks:
   skillshub-net:
     external: true
+    name: skillshub-net
 
 services:
   postgres-keycloak:
@@ -29,7 +30,7 @@ services:
     image: quay.io/keycloak/keycloak:25.0.2
     container_name: keycloak
     restart: unless-stopped
-    command: ["start", "--verbose"]
+    command: ["start", "--import-realm", "--verbose"]
     depends_on:
       postgres-keycloak:
         condition: service_healthy
@@ -42,10 +43,14 @@ services:
       KEYCLOAK_ADMIN: ${KC_ADMIN_USER}
       KEYCLOAK_ADMIN_PASSWORD: ${KC_ADMIN_PASSWORD}
 
+      # Behind Caddy reverse proxy
       KC_HTTP_ENABLED: "true"
       KC_PROXY: edge
+      KC_PROXY_HEADERS: xforwarded
 
+      # External hostname (no port)
       KC_HOSTNAME: ${KC_PUBLIC_HOSTNAME}
+      KC_HOSTNAME_URL: https://${KC_PUBLIC_HOSTNAME}
       KC_HOSTNAME_STRICT: "true"
       KC_HOSTNAME_STRICT_HTTPS: "true"
 
@@ -55,8 +60,8 @@ services:
       KC_THEME_CACHE_STATIC: "true"
     volumes:
       - ./themes:/opt/keycloak/themes:ro
+      - ./import:/opt/keycloak/data/import:ro
     expose:
       - "8080"
     networks:
       - skillshub-net
-
